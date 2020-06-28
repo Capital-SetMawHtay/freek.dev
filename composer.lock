@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "65c1091c9b96b1f4f8a63171f5abde4c",
+    "content-hash": "447ada456c53a2104e7fd09b8079d9d9",
     "packages": [
         {
             "name": "abraham/twitteroauth",
@@ -1337,7 +1337,7 @@
         },
         {
             "name": "freekmurze/generate-newsletter",
-            "version": "dev-master",
+            "version": "dev-sync-test",
             "dist": {
                 "type": "path",
                 "url": "./nova-components/GenerateNewsletter",
@@ -3036,80 +3036,94 @@
             "time": "2020-06-22T14:15:44+00:00"
         },
         {
-            "name": "ohdearapp/nova-ohdear-tool",
-            "version": "1.1.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ohdearapp/nova-ohdear-tool.git",
-                "reference": "d4f2418a7da0ed431bf205b4df73602f7aae5984"
-            },
+            "name": "ohdearapp/laravel-sync-schedule",
+            "version": "dev-master",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ohdearapp/nova-ohdear-tool/zipball/d4f2418a7da0ed431bf205b4df73602f7aae5984",
-                "reference": "d4f2418a7da0ed431bf205b4df73602f7aae5984",
-                "shasum": ""
+                "type": "path",
+                "url": "../laravel-sync-schedule",
+                "reference": "e8f739ed716a3f3be1d6aa57388bc828137cee1b"
             },
             "require": {
-                "ohdearapp/ohdear-php-sdk": "^1.5.1",
-                "php": ">=7.1"
+                "ohdearapp/ohdear-php-sdk": "dev-cron-checks",
+                "php": "^7.4",
+                "spatie/valuestore": "^1.2"
             },
             "require-dev": {
-                "orchestra/testbench": "^3.8|^4.0",
-                "phpunit/phpunit": "8.0"
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "orchestra/testbench": "^5.0",
+                "phpunit/phpunit": "^9.0",
+                "psalm/plugin-laravel": "^1.2",
+                "vimeo/psalm": "^3.11"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "OhDear\\OhDearTool\\OhDearToolServiceProvider"
+                        "OhDear\\SyncSchedule\\SyncScheduleServiceProvider"
                     ]
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "OhDear\\OhDearTool\\": "src/"
+                    "OhDear\\SyncSchedule\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "OhDear\\SyncSchedule\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "psalm": [
+                    "vendor/bin/psalm"
+                ],
+                "test": [
+                    "vendor/bin/phpunit"
+                ],
+                "test-coverage": [
+                    "vendor/bin/phpunit --coverage-html coverage"
+                ],
+                "format": [
+                    "vendor/bin/php-cs-fixer fix --allow-risky=yes"
+                ]
+            },
             "license": [
                 "MIT"
             ],
             "authors": [
                 {
                     "name": "Freek Van der Herten",
-                    "email": "freek@spatie.be",
-                    "homepage": "https://ohdear.app",
+                    "email": "freek@ohdearapp.be",
+                    "homepage": "https://ohdearapp.be",
                     "role": "Developer"
                 }
             ],
-            "description": "A Laravel Nova tool to display the application log.",
-            "homepage": "https://github.com/ohdearapp/nova-ohdear-tool",
+            "description": "Automatically sync your scheduled tasks with Oh Dear",
+            "homepage": "https://github.com/ohdearapp/laravel-sync-schedule",
             "keywords": [
-                "laravel",
-                "nova"
-            ],
-            "time": "2019-09-22T11:34:28+00:00"
+                "laravel-sync-schedule",
+                "ohdearapp"
+            ]
         },
         {
             "name": "ohdearapp/ohdear-php-sdk",
-            "version": "1.10.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/ohdearapp/ohdear-php-sdk.git",
-                "reference": "999a6126f1395286ddf5a081ebc6a35001443816"
-            },
+            "version": "dev-cron-checks",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/ohdearapp/ohdear-php-sdk/zipball/999a6126f1395286ddf5a081ebc6a35001443816",
-                "reference": "999a6126f1395286ddf5a081ebc6a35001443816",
-                "shasum": ""
+                "type": "path",
+                "url": "../ohdear-php-sdk",
+                "reference": "2de808f0985eac7a63217e727d4fad5ce6c77721"
             },
             "require": {
                 "guzzlehttp/guzzle": "^6.3",
-                "php": "^7.0"
+                "nesbot/carbon": "^2.35.0",
+                "php": "^7.4"
             },
             "require-dev": {
-                "phpunit/phpunit": "^6.0"
+                "friendsofphp/php-cs-fixer": "^2.16",
+                "phpunit/phpunit": "^9.0",
+                "psalm/plugin-laravel": "^1.2",
+                "vimeo/psalm": "^3.11",
+                "vlucas/phpdotenv": "^4.0"
             },
             "type": "library",
             "autoload": {
@@ -3117,7 +3131,22 @@
                     "OhDear\\PhpSdk\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "OhDear\\PhpSdk\\Tests\\": "tests"
+                }
+            },
+            "scripts": {
+                "psalm": [
+                    "vendor/bin/psalm"
+                ],
+                "format": [
+                    "vendor/bin/php-cs-fixer fix"
+                ],
+                "test": [
+                    "vendor/bin/phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -3136,8 +3165,7 @@
                 "monitoring",
                 "oh dear",
                 "sdk"
-            ],
-            "time": "2020-06-08T13:32:26+00:00"
+            ]
         },
         {
             "name": "opis/closure",
@@ -6013,17 +6041,17 @@
         },
         {
             "name": "spatie/laravel-mailcoach",
-            "version": "2.19.1",
+            "version": "2.19.2",
             "source": {
                 "type": "git",
                 "url": "git@github.com:spatie/laravel-mailcoach.git",
-                "reference": "84e0ce1b4ce990a65b65b8e47d2990bc33d275f8"
+                "reference": "82ae6581545e9f39bbe363ec33d4c3f600e2f6e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://satis.mailcoach.app/dist/spatie/laravel-mailcoach/spatie-laravel-mailcoach-84e0ce1b4ce990a65b65b8e47d2990bc33d275f8-zip-edd05d.zip",
-                "reference": "84e0ce1b4ce990a65b65b8e47d2990bc33d275f8",
-                "shasum": "e37f994c685709563014a6b38800c2393415dfca"
+                "url": "https://satis.mailcoach.app/dist/spatie/laravel-mailcoach/spatie-laravel-mailcoach-82ae6581545e9f39bbe363ec33d4c3f600e2f6e9-zip-a82400.zip",
+                "reference": "82ae6581545e9f39bbe363ec33d4c3f600e2f6e9",
+                "shasum": "6072265bbb0d27e78647e925435560fa7dbc1468"
             },
             "require": {
                 "cakephp/chronos": "^1.2.8|^2.0",
@@ -6115,10 +6143,10 @@
                 "spatie"
             ],
             "support": {
-                "source": "https://github.com/spatie/laravel-mailcoach/tree/2.19.1",
+                "source": "https://github.com/spatie/laravel-mailcoach/tree/2.19.2",
                 "issues": "https://github.com/spatie/laravel-mailcoach/issues"
             },
-            "time": "2020-06-26T20:37:33+00:00"
+            "time": "2020-06-28T08:13:55+00:00"
         },
         {
             "name": "spatie/laravel-mailcoach-mailgun-feedback",
@@ -7799,6 +7827,59 @@
                 "url"
             ],
             "time": "2020-02-23T13:13:32+00:00"
+        },
+        {
+            "name": "spatie/valuestore",
+            "version": "1.2.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spatie/valuestore.git",
+                "reference": "798897f7d571aa0a62786ae531d573d3c6af55d0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spatie/valuestore/zipball/798897f7d571aa0a62786ae531d573d3c6af55d0",
+                "reference": "798897f7d571aa0a62786ae531d573d3c6af55d0",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^8.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Spatie\\Valuestore\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Freek Van der Herten",
+                    "email": "freek@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Jolita Grazyte",
+                    "email": "jolita@spatie.be",
+                    "homepage": "https://spatie.be",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easily store some values",
+            "homepage": "https://github.com/spatie/valuestore",
+            "keywords": [
+                "json",
+                "spatie",
+                "valuestore"
+            ],
+            "time": "2019-02-15T10:56:05+00:00"
         },
         {
             "name": "stripe/stripe-php",
@@ -12049,7 +12130,10 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "ohdearapp/laravel-sync-schedule": 20,
+        "ohdearapp/ohdear-php-sdk": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
