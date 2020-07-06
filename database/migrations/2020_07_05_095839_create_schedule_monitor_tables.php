@@ -16,8 +16,11 @@ class CreateScheduleMonitorTables extends Migration
             $table->string('cron_expression');
             $table->string('ping_url')->nullable();
 
-            $table->dateTime('last_run_started_at')->nullable();
-            $table->dateTime('last_run_finished_at')->nullable();
+            $table->dateTime('last_started_at')->nullable();
+            $table->dateTime('last_finished_at')->nullable();
+            $table->dateTime('last_failed_at')->nullable();
+            $table->dateTime('last_skipped_at')->nullable();
+
             $table->dateTime('registered_on_oh_dear_at')->nullable();
             $table->dateTime('last_pinged_at')->nullable();
             $table->integer('grace_time_in_minutes');
@@ -37,6 +40,9 @@ class CreateScheduleMonitorTables extends Migration
                 ->cascadeOnDelete();
 
             $table->string('type');
+
+            $table->json('meta')->nullable();
+
             $table->timestamps();
         });
     }
