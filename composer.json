@@ -23,6 +23,14 @@
         {
             "type": "path",
             "url": "./nova-components/GenerateNewsletter"
+        },
+        {
+            "type": "path",
+            "url": "../laravel-schedule-monitor"
+        },
+        {
+            "type": "path",
+            "url": "../ohdear-php-sdk"
         }
     ],
     "require": {
@@ -45,7 +53,8 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "livewire/livewire": "^1.0",
-        "ohdearapp/nova-ohdear-tool": "^1.0",
+        "ohdearapp/ohdear-php-sdk": "dev-cron-checks",
+        "ohdearapp/laravel-schedule-monitor": "dev-master",
         "predis/predis": "^1.1",
         "spatie/commonmark-highlighter": "^2.0",
         "spatie/laravel-backup": "^6.8",

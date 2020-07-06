@@ -25,7 +25,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('mailcoach:send-scheduled-campaigns')->everyMinute();
         $schedule->command('mailcoach:send-campaign-summary-mail')->hourly();
         $schedule->command('mailcoach:send-email-list-summary-mail ')->mondays()->at('9:00');
-        $schedule->command('mailcoach:delete-old-unconfirmed-subscribers')->daily();
+        $schedule->command('mailcoach:delete-old-unconfirmed-subscribers')->daily()->graceTimeInMinutes(10);
+        $schedule->command('schedule-monitor:sync')->dailyAt('04:56');
+        $schedule->command('schedule-monitor:clean')->daily();
     }
 
     protected function commands()
