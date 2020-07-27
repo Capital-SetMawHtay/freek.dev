@@ -10,13 +10,10 @@ class SubscribeToNewsletterRequest extends FormRequest
 {
     public function rules()
     {
-        return [
-            'email' => ['required', 'email:rfc,dns', new EmailListSubscriptionRule($this->emailList())],
-        ];
-    }
+        $emailList = EmailList::where('name', 'freek.dev newsletter')->first();
 
-    public function emailList(): EmailList
-    {
-        return EmailList::where('name', 'freek.dev newsletter')->first();
+        return [
+            'email' => ['required', 'email:rfc,dns', new EmailListSubscriptionRule($emailList)],
+        ];
     }
 }

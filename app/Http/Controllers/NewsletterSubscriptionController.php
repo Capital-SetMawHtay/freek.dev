@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SubscribeToNewsletterRequest;
+use Spatie\Mailcoach\Models\EmailList;
 use Spatie\Mailcoach\Models\Subscriber;
 
 class NewsletterSubscriptionController
 {
     public function subscribe(SubscribeToNewsletterRequest $request)
     {
-        $emailList = $request->emailList();
+        $emailList = EmailList::where('name', 'freek.dev newsletter')->first();
 
         Subscriber::createWithEmail($request->email)
             ->redirectAfterSubscribed(action([static::class, 'confirmed']))
